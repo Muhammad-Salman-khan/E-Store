@@ -4,87 +4,126 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* SPEC design system tokens */
+/* Industrial Brutalism & Tactical Telemetry UI — Skill §4 Color System Tactical Telemetry */
+/* Skill §5 Geometry: absolute rejection of border-radius */
+/* Skill §8 Typography Clamping: clamp for macro-typography */
 :root {
-  /* Brand */
-  --primary: #D8FF3E;
-  --primary-ink: #0C0C10;
-  --accent: #FF5C38;
-
-  /* Dark theme default */
-  --bg: #0C0C10;
-  --bg-elevated: #141419;
-  --glass: rgba(255,255,255,0.05);
-  --glass-border: rgba(255,255,255,0.10);
-  --line: #26262E;
-  --shadow: 4px 4px 0 #2E2E38;
-  --text: #F4F4F0;
-  --text-muted: #9C9CA6;
-  --success: #34D399;
+  /* Substrate — Tactical Telemetry Dark, Skill §4 */
+  --bg: #0A0A0A;
+  --bg-elevated: #121212;
+  --line: #EAEAEA;
+  --text: #EAEAEA;
+  --text-muted: #9AA0A6;
+  --accent: #E61919;
+  --accent-ink: #0A0A0A;
+  --success: #4AF626;
   --warning: #FBBF24;
-  --error: #F87171;
+  --error: #E61919;
 
-  /* Tailwind shadcn compatibility */
-  --background: #0C0C10;
-  --foreground: #F4F4F0;
-  --card: #141419;
-  --card-foreground: #F4F4F0;
-  --popover: #141419;
-  --popover-foreground: #F4F4F0;
-  --primary-foreground: #0C0C10;
-  --secondary: #1f1f24;
-  --secondary-foreground: #F4F4F0;
-  --muted: #1f1f24;
-  --muted-foreground: #9C9CA6;
-  --accent-foreground: #0C0C10;
-  --destructive: #F87171;
-  --border: #26262E;
-  --input: #26262E;
-  --ring: #D8FF3E;
-  --radius: 0.625rem;
+  /* No translucency per Skill §4 — solid colors only */
+  --glass: transparent;
+  --glass-border: transparent;
+  --shadow: 2px 2px 0 #EAEAEA;
+
+  /* Type scale & spacing rhythm — Skill §3 Typographic Architecture */
+  --font-display: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-4: 1rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Tailwind shadcn compatibility – mapped to skill palette */
+  --background: #0A0A0A;
+  --foreground: #EAEAEA;
+  --card: #121212;
+  --card-foreground: #EAEAEA;
+  --popover: #121212;
+  --popover-foreground: #EAEAEA;
+  --primary: #E61919;
+  --primary-foreground: #0A0A0A;
+  --secondary: #1A1A1A;
+  --secondary-foreground: #EAEAEA;
+  --muted: #1A1A1A;
+  --muted-foreground: #9AA0A6;
+  --accent-foreground: #0A0A0A;
+  --destructive: #E61919;
+  --border: #EAEAEA;
+  --input: #EAEAEA;
+  --ring: #E61919;
+  --radius: 0rem;
 }
 
-/* Light theme */
-.light {
-  --bg: #F5F3EC;
-  --bg-elevated: #FFFFFF;
-  --glass: rgba(255,255,255,0.55);
-  --glass-border: rgba(12,12,16,0.08);
-  --line: #141419;
-  --shadow: 4px 4px 0 #141419;
-  --text: #141419;
-  --text-muted: #6B6B76;
-  --success: #059669;
-  --warning: #D97706;
-  --error: #DC2626;
-
-  --background: #F5F3EC;
-  --foreground: #141419;
-  --card: #FFFFFF;
-  --card-foreground: #141419;
-  --popover: #FFFFFF;
-  --popover-foreground: #141419;
-  --primary-foreground: #0C0C10;
-  --secondary: #f0ede3;
-  --secondary-foreground: #141419;
-  --muted: #f0ede3;
-  --muted-foreground: #6B6B76;
-  --accent-foreground: #0C0C10;
-  --destructive: #DC2626;
-  --border: #141419;
-  --input: #141419;
-  --ring: #D8FF3E;
-}
-
-/* Tailwind base */
+/* Selection, scrollbar, focus rings — Skill §5 Visible Compartmentalization */
 @layer base {
   * {
     @apply antialiased;
-  }
-  body {
-    @apply bg-[var(--bg)] text-[var(--text)] antialiased;
+    border-radius: 0 !important;
   }
   html {
-    @apply font-sans;
+    font-family: var(--font-display);
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-variant-ligatures: common-ligatures;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  /* Mechanical scrollbar */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+    border-left: 2px solid var(--line);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border: 2px solid var(--line);
+  }
+  /* Focus ring — hard line, no glow */
+  :focus-visible {
+    outline: 2px solid var(--line);
+    outline-offset: 2px;
+  }
+
+  /* Macro typography — Skill §3.1 Macro-Typography */
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+  }
+  h1 { font-size: clamp(4rem, 10vw, 15rem); }
+  h2 { font-size: clamp(2.5rem, 6vw, 6rem); }
+  h3 { font-size: clamp(1.75rem, 4vw, 3rem); }
+
+  /* Micro typography — Skill §3.2 Micro-Typography */
+  .mono, code, kbd, samp, data {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 }
+
+/* Grid determinism — Skill §8 Grid Determinism */
+.grid-determined {
+  display: grid;
+  gap: 1px;
+}
+.grid-determined > * {
+  background: var(--bg-elevated);
+}
+.grid-determined {
+  background: var(--line);
+}
+

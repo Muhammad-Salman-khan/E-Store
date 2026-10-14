@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 interface HeroSlide {
   id: string;
@@ -99,70 +99,86 @@ export function HeroCarousel() {
 
   return (
     <motion.div
-      className="relative w-full max-w-5xl overflow-hidden rounded-xl border border-[var(--glass-border)] bg-[var(--glass)] shadow-[var(--shadow)]"
+      className="relative w-full max-w-6xl overflow-hidden border-[2px] border-[var(--line)] bg-[var(--bg-elevated)]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      <div className="relative h-72 w-full">
-        <motion.div
-          className="flex h-full w-full"
-          animate={{ x: `-${activeIndex * 100}%` }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        >
-          {slides.map((slide) => (
-            <div key={slide.id} className="relative min-w-full h-full flex-shrink-0">
-              <motion.img
-                src={slide.image}
-                alt={slide.title}
-                className="w-full h-full object-cover rounded-xl"
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.5 }}
-              />
-              <motion.div className="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-black/[.6] via-black/[.2] to-transparent text-white rounded-xl">
-                <h3 className="text-xl font-bold tracking-tight">{slide.title}</h3>
-                <p className="mt-1 text-base leading-relaxed">{slide.description}</p>
-                {slide.ctaText && (
-                  <a
-                    href={slide.ctaUrl}
-                    className="mt-3 inline-block w-fit rounded-full bg-primary px-4 py-2 text-primary-ink text-sm font-medium transition-colors hover:bg-primary/90"
-                  >
-                    {slide.ctaText}
-                  </a>
-                )}
-              </motion.div>
-            </div>
-          ))}
-        </motion.div>
+      <div className="relative w-full grid grid-cols-1 lg:grid-cols-2">
+        <div className="relative aspect-[4/3] lg:aspect-auto lg:h-[520px] overflow-hidden border-r-[2px] border-[var(--line)]">
+          <motion.div
+            className="flex h-full w-full"
+            animate={{ x: `-${activeIndex * 100}%` }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          >
+            {slides.map((slide) => (
+              <div key={slide.id} className="relative min-w-full h-full flex-shrink-0">
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </motion.div>
+        </div>
+        <div className="border-t-[2px] lg:border-t-0 lg:border-l-[2px] border-[var(--line)] bg-[var(--bg)] p-[var(--space-8)] flex flex-col justify-center">
+          <div className="mono text-[12px] tracking-[0.06em] uppercase border-[2px] border-[var(--line)] px-[var(--space-4)] py-[var(--space-2)] self-start mb-[var(--space-4)]">Carousel [ {activeIndex+1} / {slides.length} ]</div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h2 className="text-[clamp(3rem,8vw,12rem)] font-black leading-[0.85] tracking-[-0.04em] uppercase">
+                {slides[activeIndex].title}
+              </h2>
+              <p className="mono text-[14px] tracking-[0.06em] mt-[var(--space-4)] max-w-[48ch] opacity-80">
+                {slides[activeIndex].description}
+              </p>
+              {slides[activeIndex].ctaText && (
+                <a
+                  href={slides[activeIndex].ctaUrl}
+                  className="mt-[var(--space-8)] inline-flex items-center border-[2px] border-[var(--line)] bg-[var(--accent)] text-[var(--accent-ink)] px-[var(--space-6)] py-[var(--space-4)] mono text-[12px] tracking-[0.06em] uppercase"
+                >
+                  {slides[activeIndex].ctaText}
+                </a>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
 
       <button
         onClick={prev}
-        className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-[var(--glass)] border border-[var(--glass-border)] p-2 hover:bg-white/[.1] transition-colors"
+        className="absolute left-4 top-1/2 -translate-y-1/2 border-2 border-[var(--line)] bg-[var(--bg-elevated)] p-3 shadow-[var(--shadow)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none transition"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="w-5 h-5" />
+        <ChevronLeft className="w-5 h-5 text-[var(--text)]" />
       </button>
       <button
         onClick={next}
-        className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-[var(--glass)] border border-[var(--glass-border)] p-2 hover:bg-white/[.1] transition-colors"
+        className="absolute right-4 top-1/2 -translate-y-1/2 border-2 border-[var(--line)] bg-[var(--bg-elevated)] p-3 shadow-[var(--shadow)] hover:translate-x-[-1px] hover:translate-y-[1px] hover:shadow-none transition"
         aria-label="Next slide"
       >
-        <ChevronRight className="w-5 h-5" />
+        <ChevronRight className="w-5 h-5 text-[var(--text)]" />
       </button>
 
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-4 left-4 flex items-center gap-[var(--space-2)] mono text-[12px] tracking-[0.06em] uppercase">
         {slides.map((_, i) => (
           <button
             key={i}
             aria-label={`Go to slide ${i + 1}`}
             onClick={() => setActiveIndex(i)}
-            className={`h-2 w-2 rounded-full transition-all ${
-              i === activeIndex ? "w-6 bg-white" : "bg-white/50"
-            }`}
-          />
+            className={`border-[2px] border-[var(--line)] px-[var(--space-4)] py-[var(--space-2)] bg-[var(--bg)] ${i === activeIndex ? "bg-[var(--accent)] text-[var(--accent-ink)]" : ""}`}
+          >
+            {String(i+1).padStart(2,'0')}
+          </button>
         ))}
       </div>
     </motion.div>

@@ -41,60 +41,48 @@ export function ProductCard({
   const formattedPrice = `Rs. ${priceInRupees.toLocaleString()}`;
 
   return (
-    <Link href={`/products/${product.slug}`} className="group relative rounded-xl border border-[var(--glass-border)] bg-[var(--glass)] shadow-[var(--shadow)] overflow-hidden hover:shadow-lg transition-shadow duration-300 block">
-      <div className="relative">
+    <Link href={`/products/${product.slug}`} className="group block border-[2px] border-[var(--line)] bg-[var(--bg-elevated)] active:translate-x-[1px] active:translate-y-[1px] transition">
+      <div className="relative aspect-[4/3] overflow-hidden border-b-[2px] border-[var(--line)] bg-[var(--bg)]">
         <Image
           src={product.images[0]}
           alt={product.name}
-          width={500}
-          height={400}
+          width={600}
+          height={450}
           unoptimized
-          className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover"
         />
         <button
           onClick={(e) => { e.preventDefault(); wishlistStore.toggle(product.id); setWish(!wish) }}
-          className="absolute top-2 right-2 p-2 rounded-full bg-[var(--bg-elevated)]/80 backdrop-blur border border-[var(--line)]"
+          className="absolute top-[var(--space-2)] right-[var(--space-2)] border-[2px] border-[var(--line)] bg-[var(--bg)] p-[var(--space-2)] mono text-[12px] tracking-[0.06em] uppercase"
           aria-label="Toggle wishlist"
         >
           <Heart className={`w-4 h-4 ${wish ? "fill-[var(--accent)] text-[var(--accent)]" : "text-[var(--text-muted)]"}`} />
         </button>
+        {showBrand && (
+          <span className="absolute top-[var(--space-2)] left-[var(--space-2)] border-[2px] border-[var(--line)] bg-[var(--accent)] text-[var(--accent-ink)] px-[var(--space-2)] py-[var(--space-1)] mono text-[10px] tracking-[0.06em] uppercase">
+            {product.brand.toUpperCase()}
+          </span>
+        )}
       </div>
 
-      {showBrand && (
-        <div className="absolute top-2 left-2 flex items-center gap-2">
-          <span className="px-2 py-1 text-xs font-medium rounded bg-[var(--primary)]/20 text-primary border border-[var(--primary)]/20">
-            {product.brand}
-          </span>
-        </div>
-      )}
-
-      <div className="p-4 flex flex-col flex-1">
-        <h3 className="line-clamp-2 text-[var(--text)] font-medium text-sm mb-2">
-          {product.name}
+      <div className="p-[var(--space-4)]">
+        <h3 className="mono text-[12px] tracking-[0.06em] uppercase leading-[1.2] line-clamp-2">
+          {product.name.toUpperCase()}
         </h3>
 
         {smallDescription && (
-          <p className="text-[var(--text-muted)] text-xs line-clamp-1">
+          <p className="mono text-[10px] tracking-[0.06em] uppercase text-[var(--text-muted)] mt-[var(--space-2)] line-clamp-1">
             {product.description}
           </p>
         )}
 
-        <div className="mt-3 flex items-baseline justify-between">
-          <span className="text-[var(--primary)] font-bold text-lg">
+        <div className="mt-[var(--space-4)] flex items-baseline justify-between gap-[var(--space-2)] border-t-[2px] border-[var(--line)] pt-[var(--space-2)]">
+          <span className="mono text-[14px] tracking-[0.06em] uppercase">
             {formattedPrice}
           </span>
-
-          {showStock && product.stock > 0 && (
-            <span className="text-[var(--success)] text-sm font-medium">
-              {product.stock} in stock
-            </span>
-          )}
-
-          {showStock && product.stock <= 0 && (
-            <span className="text-[var(--error)] text-sm font-medium">
-              Out of stock
-            </span>
-          )}
+          <span className={`mono text-[10px] tracking-[0.06em] uppercase border-[2px] border-[var(--line)] px-[var(--space-2)] py-[var(--space-1)] ${product.stock > 0 ? 'text-[var(--success)]' : 'text-[var(--error)]'}`}>
+            {product.stock > 0 ? `[ ${product.stock} IN STOCK ]` : '[ OUT OF STOCK ]'}
+          </span>
         </div>
       </div>
     </Link>

@@ -16,30 +16,21 @@ export function ProductOfTheWeek() {
   const { product, weekNumber, year } = weekly
 
   return (
-    <section className="py-12 bg-[var(--bg-elevated)] border-y border-[var(--line)] shadow-[var(--shadow)]">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
-          <div>
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--primary)] text-[var(--primary-ink)] border border-[var(--line)] text-sm font-medium">
-              ISO Week {weekNumber} {year}
-            </span>
-            <h2 className="mt-2 text-2xl font-bold tracking-tight text-[var(--text)]">
-              Product of the Week
-            </h2>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="text-[var(--text-muted)] text-sm">
-              Changes weekly
-            </span>
-          </div>
+    <section className="border-[2px] border-[var(--line)] bg-[var(--bg)]">
+      <div className="grid grid-cols-1 lg:grid-cols-12">
+        <div className="lg:col-span-5 border-r-[2px] border-[var(--line)] p-[var(--space-8)] flex flex-col justify-center">
+          <div className="mono text-[12px] tracking-[0.06em] uppercase border-[2px] border-[var(--line)] px-[var(--space-4)] py-[var(--space-2)] self-start mb-[var(--space-4)]">ISO WEEK {String(weekNumber).padStart(2,'0')} / {year}</div>
+          <h2 className="text-[clamp(3rem,8vw,10rem)] font-black leading-[0.85] tracking-[-0.04em] uppercase">SELECTION</h2>
+          <p className="mono text-[14px] tracking-[0.06em] mt-[var(--space-4)]">One product. Seven days. No exceptions. Weekly rotation locked to Asia/Karachi ISO week.</p>
         </div>
-
-        <ProductCard
-          product={product}
-          showStock
-          showBrand
-          smallDescription
-        />
+        <div className="lg:col-span-7 p-[var(--space-8)] bg-[var(--bg-elevated)] border-l-[2px] border-[var(--line)]">
+          <ProductCard
+            product={product}
+            showStock
+            showBrand
+            smallDescription
+          />
+        </div>
       </div>
     </section>
   )

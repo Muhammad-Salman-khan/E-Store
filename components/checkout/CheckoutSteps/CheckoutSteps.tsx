@@ -14,15 +14,15 @@ export function CheckoutSteps() {
   const [orderId, setOrderId] = useState<string | null>(null)
 
   return (
-    <div className="grid lg:grid-cols-3 gap-8">
-      <div className="lg:col-span-2 space-y-6">
+    <div className="grid lg:grid-cols-3 gap-[var(--space-4)]">
+      <div className="lg:col-span-2 space-y-[var(--space-4)]">
         {step === "cart" && (
-          <div className="border border-[var(--line)] rounded-xl p-6 bg-[var(--bg-elevated)]">
-            <h2 className="text-xl font-semibold mb-4">Cart Review</h2>
+          <div className="border-[2px] border-[var(--line)] p-[var(--space-6)] bg-[var(--bg-elevated)]">
+            <h2 className="mono text-[14px] tracking-[0.06em] uppercase mb-[var(--space-4)] border-b-[2px] border-[var(--line)] pb-[var(--space-2)]">Cart Review</h2>
             <OrderSummary readOnly />
             <button
               onClick={() => setStep("shipping")}
-              className="mt-6 w-full rounded-full bg-[var(--primary)] text-[var(--primary-ink)] py-3 font-medium"
+              className="mt-[var(--space-6)] w-full border-[2px] border-[var(--line)] bg-[var(--accent)] text-[var(--accent-ink)] py-[var(--space-4)] mono text-[12px] tracking-[0.06em] uppercase"
             >
               Continue to Shipping
             </button>
@@ -42,10 +42,10 @@ export function CheckoutSteps() {
           />
         )}
         {step === "confirm" && orderId && (
-          <div className="border border-[var(--line)] rounded-xl p-6 bg-[var(--bg-elevated)] text-center">
-            <h2 className="text-2xl font-bold mb-2">Order Confirmed</h2>
-            <p className="text-[var(--text-muted)]">Order #{orderId}</p>
-            <p className="mt-4">Thank you for your purchase. A confirmation has been saved.</p>
+          <div className="border-[2px] border-[var(--line)] p-[var(--space-6)] bg-[var(--bg-elevated)] text-center">
+            <h2 className="mono text-[14px] tracking-[0.06em] uppercase mb-[var(--space-2)] border-b-[2px] border-[var(--line)] pb-[var(--space-2)]">Order Confirmed</h2>
+            <p className="mono text-[12px] tracking-[0.06em] uppercase text-[var(--text-muted)]">Order #{orderId}</p>
+            <p className="mono text-[12px] tracking-[0.06em] uppercase mt-[var(--space-4)]">Thank you for your purchase. Confirmation saved.</p>
           </div>
         )}
       </div>

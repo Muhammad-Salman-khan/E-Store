@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useMemo } from "react"
+import { motion } from "motion/react"
 import { products, Product } from "@/data/products"
 import { ProductCard } from "@/components/catalog/ProductCard/ProductCard"
 import { ProductFilters } from "@/components/catalog/ProductFilters/ProductFilters"
@@ -32,27 +33,38 @@ export function ProductGrid() {
   }, [category, search, minPrice, maxPrice, sort])
 
   return (
-    <div className="py-12">
+    <div className="py-16 pt-[100px]">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-[var(--space-8)] border-b-[2px] border-[var(--line)] pb-[var(--space-6)] grid grid-cols-1 lg:grid-cols-2 gap-[var(--space-4)]">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-[var(--text)]">Products</h1>
-            <p className="text-[var(--text-muted)]">{filtered.length} items</p>
+            <h1 className="text-[clamp(3rem,8vw,12rem)] font-black leading-[0.85] tracking-[-0.04em] uppercase">Catalog</h1>
+            <p className="mono text-[12px] tracking-[0.06em] uppercase mt-[var(--space-2)]">[ {filtered.length} ITEMS AVAILABLE ]</p>
           </div>
-          <select
-            value={sort}
-            onChange={(e) => setSort(e.target.value as any)}
-            className="rounded-lg border border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2 text-[var(--text)]"
-          >
-            <option value="popularity">Sort: Popularity</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-          </select>
+          <div className="flex items-center gap-[var(--space-4)] justify-start lg:justify-end">
+            <span className="mono text-[12px] tracking-[0.06em] uppercase">Sort</span>
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as any)}
+              className="border-[2px] border-[var(--line)] bg-[var(--bg)] px-[var(--space-4)] py-[var(--space-2)] mono text-[12px] tracking-[0.06em] uppercase"
+            >
+              <option value="popularity">Popularity</option>
+              <option value="price-asc">Price: Low → High</option>
+              <option value="price-desc">Price: High → Low</option>
+            </select>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filtered.map((product) => (
-            <ProductCard key={product.id} product={product} showStock showBrand smallDescription />
+        <div className="grid-determined grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {filtered.map((product, i) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <ProductCard product={product} showStock showBrand smallDescription />
+            </motion.div>
           ))}
         </div>
       </div>

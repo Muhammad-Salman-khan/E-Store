@@ -42,49 +42,54 @@ export function CartDrawer() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 rounded-full bg-[var(--primary)] text-[var(--primary-ink)] p-4 shadow-[var(--shadow)] flex items-center gap-2"
+        className="fixed bottom-6 right-6 z-50 border-[2px] border-[var(--line)] bg-[var(--accent)] text-[var(--accent-ink)] p-[var(--space-4)] mono text-[12px] tracking-[0.06em] uppercase flex items-center gap-[var(--space-2)]"
         aria-label="Open cart"
       >
         <ShoppingBag className="w-5 h-5" />
         {totalItems > 0 && (
-          <span className="text-sm font-bold">{totalItems}</span>
+          <span className="text-sm">{totalItems}</span>
         )}
       </button>
 
       {open && (
         <div className="fixed inset-0 z-[60]">
-          <div className="absolute inset-0 bg-black/60" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-0 h-full w-full max-w-md bg-[var(--bg-elevated)] border-l border-[var(--line)] p-6 flex flex-col">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold">Cart</h2>
-              <button onClick={() => setOpen(false)}><X className="w-5 h-5" /></button>
+          <div className="absolute inset-0 bg-[var(--bg)]" onClick={() => setOpen(false)} />
+          <div className="absolute right-0 top-0 h-full w-full max-w-md border-l-[2px] border-[var(--line)] bg-[var(--bg-elevated)] p-[var(--space-6)] flex flex-col">
+            <div className="flex items-center justify-between mb-[var(--space-6)] border-b-[2px] border-[var(--line)] pb-[var(--space-4)]">
+              <h2 className="mono text-[14px] tracking-[0.06em] uppercase">Cart [ {totalItems} ]</h2>
+              <button onClick={() => setOpen(false)} className="border-[2px] border-[var(--line)] bg-[var(--bg)] p-[var(--space-2)]">
+                <X className="w-5 h-5" />
+              </button>
             </div>
-            <div className="flex-1 overflow-auto space-y-4">
-              {items.length === 0 && <p className="text-[var(--text-muted)]">Your cart is empty.</p>}
+            <div className="flex-1 overflow-auto space-y-[var(--space-4)]">
+              {items.length === 0 && <p className="mono text-[12px] tracking-[0.06em] uppercase text-[var(--text-muted)]">Cart empty</p>}
               {items.map(item => {
                 const p = products.find(p => p.id === item.productId)
                 if (!p) return null
                 return (
-                  <div key={item.productId} className="flex gap-3 border border-[var(--line)] rounded-lg p-3">
-                    <img src={p.images[0]} alt={p.name} className="w-16 h-16 object-cover rounded" />
+                  <div key={item.productId} className="flex gap-[var(--space-4)] border-[2px] border-[var(--line)] bg-[var(--bg)] p-[var(--space-4)]">
+                    <img src={p.images[0]} alt={p.name} className="w-16 h-16 object-cover border-[2px] border-[var(--line)]" />
                     <div className="flex-1">
-                      <p className="font-medium text-sm">{p.name}</p>
-                      <p className="text-xs text-[var(--text-muted)]">{formatPKR(p.price)}</p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <button onClick={() => { cartStore.update(item.productId, item.quantity - 1); setItems(cartStore.get()); window.dispatchEvent(new Event("cart-updated")) }} className="px-2">-</button>
-                        <span>{item.quantity}</span>
-                        <button onClick={() => { cartStore.update(item.productId, item.quantity + 1); setItems(cartStore.get()); window.dispatchEvent(new Event("cart-updated")) }} className="px-2">+</button>
+                      <p className="mono text-[12px] tracking-[0.06em] uppercase leading-tight">{p.name.toUpperCase()}</p>
+                      <p className="mono text-[11px] tracking-[0.06em] uppercase text-[var(--text-muted)]">{formatPKR(p.price)}</p>
+                      <div className="flex items-center gap-[var(--space-2)] mt-[var(--space-2)]">
+                        <button onClick={() => { cartStore.update(item.productId, item.quantity - 1); setItems(cartStore.get()); window.dispatchEvent(new Event("cart-updated")) }} className="border-[2px] border-[var(--line)] bg-[var(--bg-elevated)] px-[var(--space-3)] mono text-[12px] tracking-[0.06em] uppercase">-</button>
+                        <span className="w-8 text-center mono text-[12px] tracking-[0.06em] uppercase">{item.quantity}</span>
+                        <button onClick={() => { cartStore.update(item.productId, item.quantity + 1); setItems(cartStore.get()); window.dispatchEvent(new Event("cart-updated")) }} className="border-[2px] border-[var(--line)] bg-[var(--bg-elevated)] px-[var(--space-3)] mono text-[12px] tracking-[0.06em] uppercase">+</button>
                       </div>
                     </div>
                   </div>
                 )
               })}
             </div>
-            <div className="border-t border-[var(--line)] pt-4 mt-4 space-y-2">
-              <div className="flex justify-between text-sm"><span>Subtotal</span><span>{formatPKR(subtotal)}</span></div>
-              <div className="flex justify-between text-sm"><span>Shipping</span><span>{shippingPaisa === 0 ? "Free" : formatPKR(shippingPaisa)}</span></div>
-              <div className="flex justify-between font-bold"><span>Total</span><span>{formatPKR(total)}</span></div>
-              <Link href="/checkout" onClick={() => setOpen(false)} className="block text-center mt-4 rounded-full bg-[var(--primary)] text-[var(--primary-ink)] py-3 font-medium">Checkout</Link>
+            <div className="border-t-[2px] border-[var(--line)] pt-[var(--space-4)] mt-[var(--space-4)] space-y-[var(--space-2)]">
+              <div className="flex justify-between mono text-[12px] tracking-[0.06em] uppercase"><span>Subtotal</span><span>{formatPKR(subtotal)}</span></div>
+              <div className="flex justify-between mono text-[12px] tracking-[0.06em] uppercase"><span>Shipping</span><span>{shippingPaisa === 0 ? "FREE" : formatPKR(shippingPaisa)}</span></div>
+              {shippingPaisa > 0 && (
+                <div className="mono text-[10px] tracking-[0.06em] uppercase text-[var(--text-muted)]">Rs. {(500000 - subtotal)/100} away from free shipping</div>
+              )}
+              <div className="flex justify-between mono text-[14px] tracking-[0.06em] uppercase border-t-[2px] border-[var(--line)] pt-[var(--space-2)]"><span>Total</span><span>{formatPKR(total)}</span></div>
+              <Link href="/checkout" onClick={() => setOpen(false)} className="block text-center mt-[var(--space-2)] border-[2px] border-[var(--line)] bg-[var(--accent)] text-[var(--accent-ink)] py-[var(--space-4)] mono text-[12px] tracking-[0.06em] uppercase">Checkout</Link>
             </div>
           </div>
         </div>

@@ -6,10 +6,10 @@ import { products } from "@/data/products"
 import { ProductCard } from "@/components/catalog/ProductCard/ProductCard"
 
 const categories = [
-  { name: "Men's", key: "men's clothing", color: "bg-primary/10", border: "border-primary/20" },
-  { name: "Women's", key: "women's clothing", color: "bg-accent/10", border: "border-accent/20" },
-  { name: "Footwear", key: "footwear", color: "bg-[var(--primary)]/10", border: "border-[var(--primary)]/20" },
-  { name: "Accessories", key: "accessories", color: "bg-[var(--accent)]/10", border: "border-[var(--accent)]/20" },
+  { name: "Men's Clothing", key: "men's clothing" },
+  { name: "Women's Clothing", key: "women's clothing" },
+  { name: "Footwear", key: "footwear" },
+  { name: "Accessories", key: "accessories" },
 ]
 
 export function CategoryHighlights() {
@@ -24,43 +24,23 @@ export function CategoryHighlights() {
   }
 
   return (
-    <section className="py-12 bg-[var(--bg-elevated)] border-y border-[var(--glass-border)] shadow-[var(--shadow)]">
-      <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-2xl font-bold tracking-tight text-[var(--text)] mb-10">
-          Category Highlights
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((cat, i) => {
-            const productsByCategory = products.filter(
-              (p: Product) => p.category === cat.key && !p.isFeatured
-            )
-
-            const visibleNow = visible[i]
-
-            return (
-              <div
-                key={cat.key}
-                className={`
-                  rounded-xl border-[var(--glass-border)] bg-[var(--glass)] shadow-[var(--shadow)]
-                  transition-all duration-300 hover:shadow-lg hover:${cat.color} ${visibleNow ? "scale-[1.02]" : ""}
-                `}
-                onMouseEnter={() => handleIntersect(i)}
-              >
-                <div className="p-4">
-                  <p className={`text-sm font-medium ${cat.color} ${cat.border}`}>
-                    {cat.name} Collection
-                  </p>
-                  <ProductCard
-                    product={productsByCategory[0]}
-                    showBrand
-                    smallDescription
-                  />
-                </div>
-              </div>
-            )
-          })}
-        </div>
+    <section className="border-[2px] border-[var(--line)] bg-[var(--bg)]">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        {categories.map((cat) => {
+          const productsByCategory = products.filter(
+            (p: Product) => p.category === cat.key && !p.isFeatured
+          )
+          return (
+            <div key={cat.key} className="border-r-[2px] border-b-[2px] border-[var(--line)] bg-[var(--bg-elevated)] p-[var(--space-6)]">
+              <div className="mono text-[12px] tracking-[0.06em] uppercase border-[2px] border-[var(--line)] px-[var(--space-4)] py-[var(--space-2)] self-start mb-[var(--space-4)]">[{cat.name.toUpperCase()}]</div>
+              <ProductCard
+                product={productsByCategory[0]}
+                showBrand
+                smallDescription
+              />
+            </div>
+          )
+        })}
       </div>
     </section>
   )
