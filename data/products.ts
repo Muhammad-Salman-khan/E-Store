@@ -1,20 +1,20 @@
 export type Product = {
-  id: string
-  name: string
-  slug: string
-  category: string
-  price: number // in paisa (integer), display as Rs. X,XXX
-  originalPrice?: number
-  brand: string
-  stock: number
-  images: string[]
-  colors?: string[]
-  sizes?: string[]
-  description: string
-  tags?: string[]
-  isNew: boolean
-  isFeatured: boolean
-}
+  id: string;
+  name: string;
+  slug: string;
+  category: string;
+  price: number; // in paisa (integer), display as Rs. X,XXX
+  originalPrice?: number;
+  brand: string;
+  stock: number;
+  images: string[];
+  colors?: string[];
+  sizes?: string[];
+  description: string;
+  tags?: string[];
+  isNew: boolean;
+  isFeatured: boolean;
+};
 
 export const products: Product[] = [
   {
@@ -26,10 +26,13 @@ export const products: Product[] = [
     originalPrice: 329900,
     brand: "Xenia",
     stock: 42,
-    images: ["/products/khaddar-1.jpg", "/products/khaddar-2.jpg", "/products/khaddar-3.jpg"],
+    images: [
+      "https://mtjonline.com/cdn/shop/products/MKS-4020_3.jpg?v=1757321166",
+    ],
     colors: ["Black", "Navy", "Olive"],
     sizes: ["S", "M", "L", "XL", "XXL"],
-    description: "Premium hand-loomed khaddar suit with intricate embroidery and traditional motifs. Perfect for winter occasions.",
+    description:
+      "Premium hand-loomed khaddar suit with intricate embroidery and traditional motifs. Perfect for winter occasions.",
     tags: ["winter", "ethnic", "premium"],
     isNew: false,
     isFeatured: true,
@@ -42,9 +45,12 @@ export const products: Product[] = [
     price: 129900,
     brand: "Verdant",
     stock: 88,
-    images: ["/products/cotton-1.jpg", "/products/cotton-2.jpg"],
+    images: [
+      "https://medias.utsavfashion.com/media/catalog/product/cache/1/image/1000x/040ec09b1e35df139433887a97daa66f/d/i/digital-printed-pure-cotton-kurta-in-beige-v1-man90.jpg",
+    ],
     sizes: ["S", "M", "L", "XL"],
-    description: "Breathable organic cotton kurta set for everyday comfort. Soft, sustainable, and effortlessly stylish.",
+    description:
+      "Breathable organic cotton kurta set for everyday comfort. Soft, sustainable, and effortlessly stylish.",
     tags: ["cotton", "daily wear", "organic"],
     isNew: true,
     isFeatured: false,
@@ -58,10 +64,13 @@ export const products: Product[] = [
     originalPrice: 269900,
     brand: "Blossom",
     stock: 35,
-    images: ["/products/lawn-1.jpg", "/products/lawn-2.jpg", "/products/lawn-3.jpg", "/products/lawn-4.jpg"],
+    images: [
+      "https://baroque.com.pk/cdn/shop/files/187_764d7673-7eec-4a6b-8819-756a39b6672a.jpg?v=1770200560&width=1200",
+    ],
     colors: ["Floral Pink", "Floral White", "Mint"],
     sizes: ["XS", "S", "M", "L"],
-    description: "Light-as-air lawn fabric with hand-embroidered floral patterns. The perfect summer essential for casual and festive occasions.",
+    description:
+      "Light-as-air lawn fabric with hand-embroidered floral patterns. The perfect summer essential for casual and festive occasions.",
     tags: ["summer", "lawn", "festive"],
     isNew: false,
     isFeatured: true,
@@ -74,9 +83,12 @@ export const products: Product[] = [
     price: 79900,
     brand: "Safar",
     stock: 120,
-    images: ["/products/chiffon-1.jpg", "/products/chiffon-2.jpg"],
+    images: [
+      "https://ca.junaidjamshed.com/cdn/shop/files/3_4_68035f88-9bd1-4413-ab38-d7e6a6a9e387_720x.webp?v=1786181654",
+    ],
     colors: ["Midnight Blue", "Emerald Green", "Burgundy"],
-    description: "Silky chiffon shawl with sequined borders. Ideal for evening events and formal gatherings.",
+    description:
+      "Silky chiffon shawl with sequined borders. Ideal for evening events and formal gatherings.",
     tags: ["evening", "formal", "silk"],
     isNew: true,
     isFeatured: false,
@@ -90,10 +102,13 @@ export const products: Product[] = [
     originalPrice: 599900,
     brand: "Stride",
     stock: 15,
-    images: ["/products/sneakers-1.jpg", "/products/sneakers-2.jpg", "/products/sneakers-3.jpg"],
+    images: [
+      "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI1LTEyL3NyLWltYWdlLTE1MTIyMDI1LWt1MDMtcy0zMzFfMS5qcGc.jpg",
+    ],
     colors: ["Black", "Brown", "Grey"],
     sizes: ["7", "8", "9", "10", "11"],
-    description: "Premium leather sneakers with rubber sole. Built for city streets and all-day comfort.",
+    description:
+      "Premium leather sneakers with rubber sole. Built for city streets and all-day comfort.",
     tags: ["leather", "casual", "premium"],
     isNew: false,
     isFeatured: true,
@@ -106,9 +121,12 @@ export const products: Product[] = [
     price: 329900,
     brand: "Chrono",
     stock: 23,
-    images: ["/products/watch-1.jpg", "/products/watch-2.jpg"],
+    images: [
+      "https://zekira.com/cdn/shop/files/3_d14ec35e-2c2d-48df-a15b-964578c6c698_832x.jpg?v=1782740147",
+    ],
     colors: ["Gold Silver", "Rose Gold"],
-    description: "Timeless chronograph watch with stainless steel case and sapphire crystal. A statement of refined taste.",
+    description:
+      "Timeless chronograph watch with stainless steel case and sapphire crystal. A statement of refined taste.",
     tags: ["watch", "accessory", "classic"],
     isNew: true,
     isFeatured: false,
@@ -121,9 +139,12 @@ export const products: Product[] = [
     price: 165000,
     brand: "Nimrah",
     stock: 56,
-    images: ["/products/karandi-1.jpg", "/products/karandi-2.jpg"],
+    images: [
+      "https://pashmatouch.com/cdn/shop/files/LR_281125_195892.jpg?v=1765367273&width=940",
+    ],
     colors: ["Cream", "Grey", "Deep Purple"],
-    description: "Luxuriously soft silk karandi shawl with woven borders. Keeps you warm without compromising on style.",
+    description:
+      "Luxuriously soft silk karandi shawl with woven borders. Keeps you warm without compromising on style.",
     tags: ["winter", "silk", "warmth"],
     isNew: false,
     isFeatured: true,
@@ -136,10 +157,13 @@ export const products: Product[] = [
     price: 69900,
     brand: "EcoWear",
     stock: 200,
-    images: ["/products/bamboo-1.jpg", "/products/bamboo-2.jpg"],
+    images: [
+      "https://public.readdy.ai/ai/img_res/7fb2fce32aad2a4eb4702cb371b96251.jpg",
+    ],
     colors: ["White", "Black", "Olive"],
     sizes: ["S", "M", "L", "XL"],
-    description: "Ultra-soft bamboo fiber t-shirt. Naturally breathant, hypoallergenic, and environmentally friendly.",
+    description:
+      "Ultra-soft bamboo fiber t-shirt. Naturally breathant, hypoallergenic, and environmentally friendly.",
     tags: ["bamboo", "eco", "basics"],
     isNew: true,
     isFeatured: false,
@@ -153,10 +177,13 @@ export const products: Product[] = [
     originalPrice: 459900,
     brand: "TrueFit",
     stock: 72,
-    images: ["/products/denim-1.jpg", "/products/denim-2.jpg", "/products/denim-3.jpg"],
+    images: [
+      "https://employee.bestseller.com/on/demandware.static/-/Sites-pim-catalog/default/dw90242f33/pim-static/VM/10318622/10318622_DarkBlueDenim_1143313_001.jpg",
+    ],
     colors: ["Dark Indigo", "Medium Blue", "Black Wash"],
     sizes: ["28", "30", "32", "34", "36"],
-    description: "Selvedge denim with classic straight fit. Durable, comfortable, and ages beautifully over time.",
+    description:
+      "Selvedge denim with classic straight fit. Durable, comfortable, and ages beautifully over time.",
     tags: ["denim", "jeans", "classic"],
     isNew: false,
     isFeatured: true,
@@ -169,10 +196,11 @@ export const products: Product[] = [
     price: 229900,
     brand: "Sanskriti",
     stock: 41,
-    images: ["/products/saree-1.jpg", "/products/saree-2.jpg", "/products/saree-3.jpg", "/products/saree-4.jpg"],
+    images: ["https://okhai.org/cdn/shop/files/NIMSJ231.jpg?v=1754310529"],
     colors: ["Red Print", "Blue Print", "Green Print"],
     sizes: ["Free Size"],
-    description: "Hand-block printed cotton saree with traditional motifs. Perfect for festivals and family gatherings.",
+    description:
+      "Hand-block printed cotton saree with traditional motifs. Perfect for festivals and family gatherings.",
     tags: ["saree", "hand-block", "festival"],
     isNew: true,
     isFeatured: false,
@@ -185,10 +213,13 @@ export const products: Product[] = [
     price: 129900,
     brand: "Urban",
     stock: 95,
-    images: ["/products/belt-1.jpg", "/products/belt-2.jpg"],
+    images: [
+      "https://img.sellvia.com/uploads/2025/01/28/6023581447d8d0ee558200d461432d39.jpg-full.webp",
+    ],
     colors: ["Brown", "Black"],
     sizes: ["S", "M", "L"],
-    description: "Genuine leather belt with classic buckle. A versatile accessory for both formal and casual wear.",
+    description:
+      "Genuine leather belt with classic buckle. A versatile accessory for both formal and casual wear.",
     tags: ["leather", "accessory", "essential"],
     isNew: false,
     isFeatured: false,
@@ -201,11 +232,14 @@ export const products: Product[] = [
     price: 35000,
     brand: "Hydra",
     stock: 300,
-    images: ["/products/bottle-1.jpg", "/products/bottle-2.jpg"],
+    images: [
+      "https://assets.wfcdn.com/im/52272228/resize-h400-w400%5Ecompr-r85/4177/417791907/17OZ+Vacuum+Insulated+Stainless+Steel+Water+Bottle%2C+Double+Wall+Wide+Mouth+Lids.jpg",
+    ],
     colors: ["Silver", "Black", "Blue"],
-    description: "Double-walled insulated metal water bottle. Keeps drinks cold for 24 hours or hot for 12 hours.",
+    description:
+      "Double-walled insulated metal water bottle. Keeps drinks cold for 24 hours or hot for 12 hours.",
     tags: ["water bottle", "insulated", "eco"],
     isNew: true,
     isFeatured: false,
   },
-]
+];

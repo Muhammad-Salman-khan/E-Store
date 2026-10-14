@@ -1,25 +1,30 @@
-import Image from "next/image"
+import Image from "next/image";
 
-import type { Product } from "@/data/products"
+import type { Product } from "@/data/products";
 
 interface ProductCardProps {
-  product?: Product | null
-  showStock?: boolean
-  showBrand?: boolean
-  smallDescription?: boolean
+  product?: Product | null;
+  showStock?: boolean;
+  showBrand?: boolean;
+  smallDescription?: boolean;
 }
 
-export function ProductCard({ product, showStock = true, showBrand = true, smallDescription = false }: ProductCardProps) {
+export function ProductCard({
+  product,
+  showStock = true,
+  showBrand = true,
+  smallDescription = false,
+}: ProductCardProps) {
   if (!product) {
     return (
       <div className="p-4 h-64 flex items-center justify-center text-[var(--text-muted)]">
         No product available
       </div>
-    )
+    );
   }
 
-  const priceInRupees = product.price / 100
-  const formattedPrice = `Rs. ${priceInRupees.toLocaleString()}`
+  const priceInRupees = product.price / 100;
+  const formattedPrice = `Rs. ${priceInRupees.toLocaleString()}`;
 
   return (
     <div className="group relative rounded-xl border border-[var(--glass-border)] bg-[var(--glass)] shadow-[var(--shadow)] overflow-hidden hover:shadow-lg transition-shadow duration-300">
@@ -28,6 +33,7 @@ export function ProductCard({ product, showStock = true, showBrand = true, small
         alt={product.name}
         width={500}
         height={400}
+        unoptimized
         className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
       />
 
@@ -40,14 +46,20 @@ export function ProductCard({ product, showStock = true, showBrand = true, small
       )}
 
       <div className="p-4 flex flex-col flex-1">
-        <h3 className="line-clamp-2 text-[var(--text)] font-medium text-sm mb-2">{product.name}</h3>
+        <h3 className="line-clamp-2 text-[var(--text)] font-medium text-sm mb-2">
+          {product.name}
+        </h3>
 
         {smallDescription && (
-          <p className="text-[var(--text-muted)] text-xs line-clamp-1">{product.description}</p>
+          <p className="text-[var(--text-muted)] text-xs line-clamp-1">
+            {product.description}
+          </p>
         )}
 
         <div className="mt-3 flex items-baseline justify-between">
-          <span className="text-[var(--primary)] font-bold text-lg">{formattedPrice}</span>
+          <span className="text-[var(--primary)] font-bold text-lg">
+            {formattedPrice}
+          </span>
 
           {showStock && product.stock > 0 && (
             <span className="text-[var(--success)] text-sm font-medium">
@@ -63,5 +75,5 @@ export function ProductCard({ product, showStock = true, showBrand = true, small
         </div>
       </div>
     </div>
-  )
+  );
 }
