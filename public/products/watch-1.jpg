@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="400" viewBox="0 0 500 400">
+  <rect width="500" height="400" fill="#141419"/>
+  <text x="250" y="200" fill="#D8FF3E" font-size="20" text-anchor="middle">
+    Designer Watch
+  </text>
+  <text x="250" y="240" fill="#FF5C38" font-size="16" text-anchor="middle">
+    Chrono Classic
+  </text>
+</svg>
