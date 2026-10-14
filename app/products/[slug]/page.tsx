@@ -4,12 +4,17 @@ import { ProductGallery } from "@/components/catalog/ProductGallery/ProductGalle
 import { ProductWishlistButton } from "@/components/catalog/ProductWishlistButton/ProductWishlistButton"
 import { formatPKR } from "@/lib/format"
 
-interface Props {
-  params: { slug: string }
+export async function generateStaticParams() {
+  return products.map(p => ({ slug: p.slug }))
 }
 
-export default function ProductDetailPage({ params }: Props) {
-  const product = products.find((p) => p.slug === params.slug)
+interface Props {
+  params: Promise<{ slug: string }>
+}
+
+export default async function ProductDetailPage({ params }: Props) {
+  const { slug } = await params
+  const product = products.find((p) => p.slug === slug)
   if (!product) notFound()
 
   return (
