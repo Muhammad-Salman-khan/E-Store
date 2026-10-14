@@ -27,7 +27,7 @@ export const products: Product[] = [
     brand: "Xenia",
     stock: 42,
     images: [
-      "https://mtjonline.com/cdn/shop/products/MKS-4020_3.jpg?v=1757321166",
+      "/products/khaddar-1.jpg",
     ],
     colors: ["Black", "Navy", "Olive"],
     sizes: ["S", "M", "L", "XL", "XXL"],

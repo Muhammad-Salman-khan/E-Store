@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import { products } from "@/data/products"
 import { ProductGallery } from "@/components/catalog/ProductGallery/ProductGallery"
+import { ProductWishlistButton } from "@/components/catalog/ProductWishlistButton/ProductWishlistButton"
 import { formatPKR } from "@/lib/format"
 
 interface Props {
@@ -54,6 +55,9 @@ export default function ProductDetailPage({ params }: Props) {
             <p className={`text-sm ${product.stock > 0 ? "text-[var(--success)]" : "text-[var(--error)]"}`}>
               {product.stock > 0 ? `In stock (${product.stock} available)` : "Out of stock"}
             </p>
+            <div className="mt-4">
+              <ProductWishlistButton productId={product.id} />
+            </div>
           </div>
         </div>
       </div>

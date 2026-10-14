@@ -214,11 +214,6 @@ Exact tokens. Implement as CSS variables, no deviations.
 - `--accent` is reserved for sale/urgent.
 - Never place primary and accent adjacent at large sizes.
 
-**Product imagery:** generate all product visuals locally in one consistent style
-(flat product renders on the theme background). No external image hosts, no random
-stock photos — a wallet must not show a mountain. If any remote image host is ever
-used, add it to the Next.js image settings first.
-
 ## Quality bar — no AI slop
 
 These are hard failures, not suggestions.

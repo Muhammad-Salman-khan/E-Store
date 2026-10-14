@@ -33,7 +33,7 @@ export function Navbar() {
           <Link href="/products" className="text-2xl font-bold text-[var(--text)] hover:text-[var(--primary)]">
             Products
           </Link>
-          <Link href="/#" className="text-2xl font-bold text-[var(--text)] hover:text-[var(--primary)]">
+          <Link href="/" className="text-2xl font-bold text-[var(--text)] hover:text-[var(--primary)]">
             Home
           </Link>
           <button
@@ -47,7 +47,7 @@ export function Navbar() {
 
       {/* Desktop menu */}
       <div className="hidden md:flex items-center gap-8">
-        <Link href="/#" className="text-[var(--text)] hover:text-[var(--primary)] transition-colors">
+        <Link href="/" className="text-[var(--text)] hover:text-[var(--primary)] transition-colors">
           Home
         </Link>
         <Link href="/products" className="text-[var(--text)] hover:text-[var(--primary)] transition-colors">
