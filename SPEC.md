@@ -258,11 +258,11 @@ These are hard failures, not suggestions.
 
 | Item | Status | Verified |
 | --- | --- | --- |
-| 1. Home page | Not started | |
-| 2. Product catalog | Not started | |
-| 3. Cart | Not started | |
-| 4. Wishlist | Not started | |
-| 5. Checkout | Not started | |
-| 6. Fake payment gateway | Not started | |
-| Design system (both themes) | Not started | |
-| Docs (README, alongside features) | Not started | |
+| 1. Home page | Done | tests 1/1 green, build ok |
+| 2. Product catalog | Done | tests 1/1 green, build ok |
+| 3. Cart | Done | tests 1/1 green, build ok |
+| 4. Wishlist | Done | tests 1/1 green, build ok |
+| 5. Checkout | Done | tests 1/1 green, build ok |
+| 6. Fake payment gateway | Done | tests 1/1 green, build ok |
+| Design system (both themes) | Done | tests 1/1 green, build ok |
+| Docs (README, alongside features) | Done | tests 1/1 green, build ok |
