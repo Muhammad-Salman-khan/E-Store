@@ -18,11 +18,11 @@ export function ProductGridWishlist() {
   const items = products.filter(p => ids.includes(p.id))
 
   if (items.length === 0) {
-    return <p className="text-[var(--text-muted)]">Your wishlist is empty.</p>
+    return <p className="mono text-[12px] tracking-[0.06em] uppercase text-[var(--text-muted)] border-[2px] border-[var(--line)] p-[var(--space-6)] bg-[var(--bg-elevated)]">Your wishlist is empty.</p>
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[var(--space-4)]">
       {items.map(p => <ProductCard key={p.id} product={p} showStock showBrand />)}
     </div>
   )

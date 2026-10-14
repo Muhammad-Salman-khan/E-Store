@@ -13,27 +13,27 @@ const allCategories = [
 
 export function ProductFilters() {
   return (
-    <div className="p-6 border-y border-[var(--glass-border)] bg-[var(--glass)] shadow-[var(--shadow)] mb-8">
-      <h2 className="text-xl font-bold tracking-tight text-[var(--text)] mb-6">
+    <div className="p-[var(--space-6)] border-y-[2px] border-[var(--line)] bg-[var(--bg-elevated)] mb-[var(--space-8)]">
+      <h2 className="mono text-[14px] tracking-[0.06em] uppercase border-b-[2px] border-[var(--line)] pb-[var(--space-2)] mb-[var(--space-6)]">
         Filters
       </h2>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-[var(--space-4)] sm:grid-cols-2 lg:grid-cols-4">
         {/* Category filter */}
-        <div>
-          <Label className="text-[var(--text-muted)] text-sm mb-2">
+        <div className="border-[2px] border-[var(--line)] p-[var(--space-4)]">
+          <Label className="mono text-[12px] tracking-[0.06em] uppercase block mb-[var(--space-2)] text-[var(--text-muted)]">
             Category
           </Label>
 
           <Select>
-            <SelectTrigger>
+            <SelectTrigger className="border-[2px] border-[var(--line)] bg-[var(--bg-elevated)] mono text-[12px] tracking-[0.06em] uppercase">
               <SelectValue />
             </SelectTrigger>
 
-            <SelectContent>
-              <SelectItem value="all">All Categories</SelectItem>
+            <SelectContent className="border-[2px] border-[var(--line)] bg-[var(--bg-elevated)]">
+              <SelectItem value="all" className="mono text-[12px] tracking-[0.06em] uppercase">All Categories</SelectItem>
               {allCategories.map((cat) => (
-                <SelectItem key={cat} value={cat}>
+                <SelectItem key={cat} value={cat} className="mono text-[12px] tracking-[0.06em] uppercase">
                   {cat}
                 </SelectItem>
               ))}
@@ -42,27 +42,27 @@ export function ProductFilters() {
         </div>
 
         {/* Min price */}
-        <div>
-          <Label className="text-[var(--text-muted)] text-sm mb-2">
+        <div className="border-[2px] border-[var(--line)] p-[var(--space-4)]">
+          <Label className="mono text-[12px] tracking-[0.06em] uppercase block mb-[var(--space-2)] text-[var(--text-muted)]">
             Min Price
           </Label>
           <Input
             type="number"
             value={0}
-            className="w-full"
+            className="w-full border-[2px] border-[var(--line)] bg-[var(--bg-elevated)] mono text-[12px] tracking-[0.06em] uppercase"
             placeholder="0"
           />
         </div>
 
         {/* Max price */}
-        <div>
-          <Label className="text-[var(--text-muted)] text-sm mb-2">
+        <div className="border-[2px] border-[var(--line)] p-[var(--space-4)]">
+          <Label className="mono text-[12px] tracking-[0.06em] uppercase block mb-[var(--space-2)] text-[var(--text-muted)]">
             Max Price
           </Label>
           <Input
             type="number"
             value={999999}
-            className="w-full"
+            className="w-full border-[2px] border-[var(--line)] bg-[var(--bg-elevated)] mono text-[12px] tracking-[0.06em] uppercase"
             placeholder="999999"
           />
         </div>
