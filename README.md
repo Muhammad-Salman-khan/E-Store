@@ -1,50 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# E-Store — Industrial Brutalism E-Commerce
+
+A production-grade Next.js 16 + React 19 storefront rebuilt under Industrial Brutalism & Tactical Telemetry UI skill authority with SPEC-mandated non-negotiables preserved where compatible.
+
+## Design Authority
+* **Primary skill:** Industrial Brutalism & Tactical Telemetry UI
+  * §3 Typographic Architecture — Macro-typography clamp, tight tracking, uppercase structural headers; Micro-typography monospace 10-14px tracking 0.05-0.1em uppercase
+  * §4 Color System — Tactical Telemetry dark substrate `#0A0A0A / #121212`, foreground `#EAEAEA`, accent `#E61919` only, solid colors, no gradients/translucency
+  * §5 Layout and Spatial Engineering — Blueprint Grid, Visible Compartmentalization with 2px solid borders, bimodal density, absolute rejection of border-radius
+  * §8 Web Engineering Directives — Grid Determinism, Semantic Rigidity, Typography Clamping
+* **Project rules:** SPEC.md tokens for build constraints, AGENTS.md quality bar. Skill overrides visual language; tokens adapted to skill palette.
+
+## Tech Stack
+* Next.js 16 App Router, React 19, TypeScript strict
+* Tailwind 4, shadcn/ui radix-nova
+* motion package for physical spring transitions
+* next-themes, lucide-react, zod
+* Cart / Wishlist state persisted to localStorage; seed data in `data/products.ts`
+* pnpm only
 
 ## Features
-- Home page with hero carousel auto-rotation + swipe, Product of the Week ISO-week rotation Asia/Karachi, category highlights
-- Product catalog with filters sort, product detail with gallery variants
-- Cart with slide-over drawer, localStorage persistence, shipping Rs 250 free over Rs 5,000
-- Wishlist with heart toggle, persisted
-- Checkout multi-step: cart review → shipping validation via Zod → fake payment
-- Fake payment gateway demo mode with success/decline paths, order confirmation persisted
+* Home: HeroCarousel with editorial split layout, Product of the Week ISO-week rotation Asia/Karachi, Category Highlights as 4-column compartment grid
+* Catalog: Filterable/sortable grid with grid-determined layout and staggered motion entrances
+* Product Card: 2px bordered compartments, mono uppercase metadata, accent red brand badge, press-offset hover
+* Product Detail: Compartment grid with macro heading clamp, variant selectors as 2px bordered chips, sticky buy bar mobile
+* Cart Drawer: Spring physics, quantity controls with press offset, shipping threshold progress `Rs. X away from free shipping`
+* Checkout: Multi-step cart review → shipping → fake payment → confirmation. All panels 2px bordered, mono uppercase.
+* Fake payment gateway: Demo mode, success/decline paths, order number persisted
 
-## Weekly rotation logic
-`lib/weekly.ts` computes ISO week number in Asia/Karachi timezone via UTC+5 offset and ISO week algorithm. `getWeeklyProduct` returns product index `(week-1) % products.length`. Home page renders `ProductOfTheWeek` client component which updates on mount.
+## Design System
+* Background `#0A0A0A`, elevated `#121212`, line `#EAEAEA`, accent `#E61919`
+* No border-radius, no gradients, no translucency
+* Typography: Display = Inter/Archivo Black with `clamp()`, tracking -0.04em, leading 0.85-0.95 uppercase; Micro = JetBrains Mono 12px tracking 0.06em uppercase
+* Spacing rhythm 4/8px base via CSS vars `--space-1/2/4/8/12/16`
+* Motion: scroll-in entrances, spring drawers, staggered lists, micro-interactions
 
-## Fake payment gateway
-`components/checkout/FakePaymentForm` validates card with Zod, simulates 1.5s processing, randomly succeeds/declines. On success generates order ID `ORD-######`, stores order in localStorage `ecom_orders_v1`, shows confirmation.
-
-## Getting Started
-
-First, run the development server:
-
+## Commands
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
+pnpm lint
+pnpm build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Quality Bar
+* Zero lorem ipsum, real product copy
+* No gradients, no emojis, no fake social proof
+* Every button/link functional
+* Mobile 360px tested, no horizontal scroll
+* Build passes before Done
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
+```
+app/
+components/
+  layout/
+  home/
+  catalog/
+  cart/
+  checkout/
+lib/store/
+data/products.ts
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Weekly Rotation
+Product of the Week derived deterministically from ISO week number Asia/Karachi via `lib/weekly.ts`. Home page is not statically cached for this section.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+* Theme toggle kept for hydration safety but palette is single substrate per skill §4.
+* All visual changes cite skill sections: §3.1 Macro-Typography, §3.2 Micro-Typography, §4 Color System, §5 Visible Compartmentalization, §8 Grid Determinism.
