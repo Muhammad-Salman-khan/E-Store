@@ -47,16 +47,24 @@ const slides: HeroSlide[] = [
 
 export function HeroCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
-    timerRef.current = setTimeout(() => {
+    if (isHovered) {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+      return;
+    }
+    intervalRef.current = setInterval(() => {
       setActiveIndex((i) => (i + 1) % slides.length);
     }, 5000);
     return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
+      if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, []);
+  }, [isHovered]);
 
   const prev = () => {
     setActiveIndex((i) => (i - 1 + slides.length) % slides.length);
@@ -68,51 +76,39 @@ export function HeroCarousel() {
   return (
     <motion.div
       className="relative w-full max-w-5xl overflow-hidden rounded-xl border border-[var(--glass-border)] bg-[var(--glass)] shadow-[var(--shadow)]"
-      whileHover={{}}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="flex w-full flex-nowrap transition-transform duration-5000 ease-out">
-        {slides.map((slide, i) => {
-          const isActive = i === activeIndex;
-          const translateX = (i - activeIndex) * 100;
-          return (
-            <motion.div
-              key={slide.id}
-              className={`
-                min-w-0 flex-shrink-0 flex flex-col
-                ${isActive ? "opacity-100" : "opacity-0"}
-                ${!isActive ? `translateX([${translateX}%,0%)` : ""}
-              `}
-              style={{
-                transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-                transitionDuration: "0.5s",
-              }}
-            >
-              <motion.div className="relative group">
-                <motion.img
-                  src={slide.image}
-                  alt={slide.title}
-                  className="w-full h-48 object-cover rounded-t-xl transition-transform duration-500 ease-out group:scale-95"
-                />
-                <motion.div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/[.6] via-black/[.4] to-transparent text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <h3 className="text-xl font-bold tracking-tight">
-                    {slide.title}
-                  </h3>
-                  <p className="mt-1 text-base leading-relaxed">
-                    {slide.description}
-                  </p>
-                  {slide.ctaText && (
-                    <a
-                      href={slide.ctaUrl}
-                      className="mt-3 inline-block rounded-full bg-primary px-4 py-2 text-primary-ink text-sm font-medium transition-colors hover:bg-primary/90"
-                    >
-                      {slide.ctaText}
-                    </a>
-                  )}
-                </motion.div>
+      <div className="relative h-72 w-full">
+        <motion.div
+          className="flex h-full w-full"
+          animate={{ x: `-${activeIndex * 100}%` }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        >
+          {slides.map((slide) => (
+            <div key={slide.id} className="relative min-w-full h-full flex-shrink-0">
+              <motion.img
+                src={slide.image}
+                alt={slide.title}
+                className="w-full h-full object-cover rounded-xl"
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.5 }}
+              />
+              <motion.div className="absolute inset-0 p-6 flex flex-col justify-end bg-gradient-to-t from-black/[.6] via-black/[.2] to-transparent text-white rounded-xl">
+                <h3 className="text-xl font-bold tracking-tight">{slide.title}</h3>
+                <p className="mt-1 text-base leading-relaxed">{slide.description}</p>
+                {slide.ctaText && (
+                  <a
+                    href={slide.ctaUrl}
+                    className="mt-3 inline-block w-fit rounded-full bg-primary px-4 py-2 text-primary-ink text-sm font-medium transition-colors hover:bg-primary/90"
+                  >
+                    {slide.ctaText}
+                  </a>
+                )}
               </motion.div>
-            </motion.div>
-          );
-        })}
+            </div>
+          ))}
+        </motion.div>
       </div>
 
       <button
@@ -129,6 +125,19 @@ export function HeroCarousel() {
       >
         <ChevronRight className="w-5 h-5" />
       </button>
+
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            aria-label={`Go to slide ${i + 1}`}
+            onClick={() => setActiveIndex(i)}
+            className={`h-2 w-2 rounded-full transition-all ${
+              i === activeIndex ? "w-6 bg-white" : "bg-white/50"
+            }`}
+          />
+        ))}
+      </div>
     </motion.div>
   );
 }
