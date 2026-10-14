@@ -4,6 +4,8 @@ import "./globals.css"
 import { Providers } from "@/components/providers/Providers"
 import { ThemeToggle } from "@/components/layout/ThemeToggle/ThemeToggle"
 import { Navbar } from "@/components/layout/Navbar/Navbar"
+import { Sidebar } from "@/components/layout/Sidebar/Sidebar"
+import { CartDrawer } from "@/components/cart/CartDrawer/CartDrawer"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,9 +30,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--text)]">
         <Providers>
+          <Sidebar />
           <Navbar />
           <ThemeToggle />
-          {children}
+          <CartDrawer />
+          <main className="md:ml-64">{children}</main>
         </Providers>
       </body>
     </html>

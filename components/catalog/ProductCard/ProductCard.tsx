@@ -1,6 +1,12 @@
+"use client"
+
 import Image from "next/image";
+import { Heart } from "lucide-react"
+import Link from "next/link"
 
 import type { Product } from "@/data/products";
+import { wishlistStore } from "@/lib/store/wishlist"
+import { useEffect, useState } from "react"
 
 interface ProductCardProps {
   product?: Product | null;
@@ -15,6 +21,7 @@ export function ProductCard({
   showBrand = true,
   smallDescription = false,
 }: ProductCardProps) {
+  const [wish, setWish] = useState(false)
   if (!product) {
     return (
       <div className="p-4 h-64 flex items-center justify-center text-[var(--text-muted)]">
@@ -23,19 +30,35 @@ export function ProductCard({
     );
   }
 
+  useEffect(() => {
+    setWish(wishlistStore.has(product.id))
+    const handler = () => setWish(wishlistStore.has(product.id))
+    window.addEventListener("wishlist-updated", handler)
+    return () => window.removeEventListener("wishlist-updated", handler)
+  }, [product.id])
+
   const priceInRupees = product.price / 100;
   const formattedPrice = `Rs. ${priceInRupees.toLocaleString()}`;
 
   return (
-    <div className="group relative rounded-xl border border-[var(--glass-border)] bg-[var(--glass)] shadow-[var(--shadow)] overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      <Image
-        src={product.images[0]}
-        alt={product.name}
-        width={500}
-        height={400}
-        unoptimized
-        className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
-      />
+    <Link href={`/products/${product.slug}`} className="group relative rounded-xl border border-[var(--glass-border)] bg-[var(--glass)] shadow-[var(--shadow)] overflow-hidden hover:shadow-lg transition-shadow duration-300 block">
+      <div className="relative">
+        <Image
+          src={product.images[0]}
+          alt={product.name}
+          width={500}
+          height={400}
+          unoptimized
+          className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <button
+          onClick={(e) => { e.preventDefault(); wishlistStore.toggle(product.id); setWish(!wish) }}
+          className="absolute top-2 right-2 p-2 rounded-full bg-[var(--bg-elevated)]/80 backdrop-blur border border-[var(--line)]"
+          aria-label="Toggle wishlist"
+        >
+          <Heart className={`w-4 h-4 ${wish ? "fill-[var(--accent)] text-[var(--accent)]" : "text-[var(--text-muted)]"}`} />
+        </button>
+      </div>
 
       {showBrand && (
         <div className="absolute top-2 left-2 flex items-center gap-2">
@@ -74,6 +97,6 @@ export function ProductCard({
           )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

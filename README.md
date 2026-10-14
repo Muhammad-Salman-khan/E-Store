@@ -1,5 +1,19 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Features
+- Home page with hero carousel auto-rotation + swipe, Product of the Week ISO-week rotation Asia/Karachi, category highlights
+- Product catalog with filters sort, product detail with gallery variants
+- Cart with slide-over drawer, localStorage persistence, shipping Rs 250 free over Rs 5,000
+- Wishlist with heart toggle, persisted
+- Checkout multi-step: cart review → shipping validation via Zod → fake payment
+- Fake payment gateway demo mode with success/decline paths, order confirmation persisted
+
+## Weekly rotation logic
+`lib/weekly.ts` computes ISO week number in Asia/Karachi timezone via UTC+5 offset and ISO week algorithm. `getWeeklyProduct` returns product index `(week-1) % products.length`. Home page renders `ProductOfTheWeek` client component which updates on mount.
+
+## Fake payment gateway
+`components/checkout/FakePaymentForm` validates card with Zod, simulates 1.5s processing, randomly succeeds/declines. On success generates order ID `ORD-######`, stores order in localStorage `ecom_orders_v1`, shows confirmation.
+
 ## Getting Started
 
 First, run the development server:
