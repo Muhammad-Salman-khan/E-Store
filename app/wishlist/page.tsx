@@ -1,4 +1,15 @@
+import type { Metadata } from "next"
 import { ProductGridWishlist } from "@/components/wishlist/ProductGridWishlist/ProductGridWishlist"
+
+export const metadata: Metadata = {
+  title: 'Wishlist',
+  description: 'Your saved items. Review and purchase premium Pakistani fashion, footwear and accessories from your wishlist.',
+  robots: { index: false, follow: false },
+  openGraph: {
+    title: 'Wishlist | E-Store',
+    description: 'Your saved items from E-Store.',
+  },
+}
 
 export default function WishlistPage() {
   return (

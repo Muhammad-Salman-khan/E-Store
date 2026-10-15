@@ -1,9 +1,38 @@
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { products } from "@/data/products"
 import { ProductGallery } from "@/components/catalog/ProductGallery/ProductGallery"
 import { ProductWishlistButton } from "@/components/catalog/ProductWishlistButton/ProductWishlistButton"
 import { AddToCartButton } from "@/components/catalog/AddToCartButton/AddToCartButton"
+import { VariantSelector } from "@/components/catalog/VariantSelector/VariantSelector"
 import { formatPKR } from "@/lib/format"
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const product = products.find((p) => p.slug === slug)
+  if (!product) {
+    return {
+      title: 'Product Not Found',
+    }
+  }
+  const price = formatPKR(product.price)
+  return {
+    title: `${product.name} | ${product.brand}`,
+    description: `${product.description} Shop ${product.name} by ${product.brand} for ${price}. ${product.stock > 0 ? 'In stock' : 'Out of stock'}.`,
+    openGraph: {
+      title: `${product.name} - ${product.brand}`,
+      description: product.description,
+      images: product.images.map(img => ({ url: img, alt: product.name })),
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${product.name} | ${product.brand}`,
+      description: product.description,
+      images: product.images,
+    },
+  }
+}
 
 export async function generateStaticParams() {
   return products.map(p => ({ slug: p.slug }))
@@ -35,29 +64,7 @@ export default async function ProductDetailPage({ params }: Props) {
           </div>
           <p className="mono text-[12px] tracking-[0.06em] uppercase text-[var(--text-muted)] mt-[var(--space-4)] max-w-[60ch]">{product.description}</p>
 
-          {product.colors && (
-            <div className="mt-[var(--space-8)] border-t-[2px] border-[var(--line)] pt-[var(--space-4)]">
-              <h3 className="mono text-[12px] tracking-[0.06em] uppercase mb-[var(--space-2)]">Colors</h3>
-              <div className="flex gap-[var(--space-2)]">
-                {product.colors.map((c) => (
-                  <span key={c} className="px-[var(--space-4)] py-[var(--space-2)] border-[2px] border-[var(--line)] mono text-[11px] tracking-[0.06em] uppercase">{c.toUpperCase()}</span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {product.sizes && (
-            <div className="mt-[var(--space-8)] border-t-[2px] border-[var(--line)] pt-[var(--space-4)]">
-              <h3 className="mono text-[12px] tracking-[0.06em] uppercase mb-[var(--space-2)]">Sizes</h3>
-              <div className="flex flex-wrap gap-[var(--space-2)]">
-                {product.sizes.map((s) => (
-                  <button key={s} className="px-[var(--space-4)] py-[var(--space-2)] border-[2px] border-[var(--line)] mono text-[11px] tracking-[0.06em] uppercase bg-[var(--bg)]">
-                    {s.toUpperCase()}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
+          <VariantSelector colors={product.colors} sizes={product.sizes} />
 
           <div className="mt-[var(--space-8)] border-t-[2px] border-[var(--line)] pt-[var(--space-4)]">
             <p className={`mono text-[12px] tracking-[0.06em] uppercase ${product.stock > 0 ? "text-[var(--success)]" : "text-[var(--error)]"}`}>

@@ -28,8 +28,9 @@ export function FakePaymentForm({ shipping, onSuccess, onBack }: Props) {
     setProcessing(true)
     setTimeout(() => {
       setProcessing(false)
-      const success = Math.random() > 0.3
-      if (success) {
+      const cardNumber = (data.cardNumber || "").replace(/\s+/g, "")
+      const isDeclined = cardNumber === "4000000000000002"
+      if (!isDeclined) {
         const orderId = "ORD-" + Math.floor(Math.random()*1000000).toString().padStart(6,"0")
         localStorage.setItem("ecom_orders_v1", JSON.stringify([...JSON.parse(localStorage.getItem("ecom_orders_v1")||"[]"), { orderId, shipping, payment: data, date: new Date().toISOString() }]))
         setResult("success")
@@ -64,7 +65,7 @@ export function FakePaymentForm({ shipping, onSuccess, onBack }: Props) {
       {result === "decline" && <p className="mono text-[12px] tracking-[0.06em] uppercase text-[var(--error)]">Payment declined. Try different card number.</p>}
       <div className="flex gap-[var(--space-3)] pt-[var(--space-2)]">
         <button type="button" onClick={onBack} className="px-[var(--space-4)] py-[var(--space-3)] border-[2px] border-[var(--line)] mono text-[12px] tracking-[0.06em] uppercase bg-[var(--bg)]">Back</button>
-        <button disabled={processing} className="px-[var(--space-4)] py-[var(--space-3)] border-[2px] border-[var(--line)] bg-[var(--accent)] text-[var(--accent-ink)] mono text-[12px] tracking-[0.06em] uppercase disabled:opacity-50">
+        <button disabled={processing} className="px-[var(--space-4)] py-[var(--space-3)] border-[2px] border-[var(--line)] bg-[var(--primary)] text-[var(--primary-ink)] mono text-[12px] tracking-[0.06em] uppercase disabled:opacity-50">
           {processing ? "Processing..." : "Pay Now"}
         </button>
       </div>

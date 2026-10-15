@@ -7,6 +7,7 @@ import Link from "next/link"
 import type { Product } from "@/data/products";
 import { wishlistStore } from "@/lib/store/wishlist"
 import { useEffect, useState } from "react"
+import { formatPKR } from "@/lib/format"
 
 interface ProductCardProps {
   product?: Product | null;
@@ -36,9 +37,6 @@ export function ProductCard({
     window.addEventListener("wishlist-updated", handler)
     return () => window.removeEventListener("wishlist-updated", handler)
   }, [product.id])
-
-  const priceInRupees = product.price / 100;
-  const formattedPrice = `Rs. ${priceInRupees.toLocaleString()}`;
 
   return (
     <Link href={`/products/${product.slug}`} className="group block border-[2px] border-[var(--line)] bg-[var(--bg-elevated)] active:translate-x-[1px] active:translate-y-[1px] transition">
@@ -78,7 +76,7 @@ export function ProductCard({
 
         <div className="mt-[var(--space-4)] flex items-baseline justify-between gap-[var(--space-2)] border-t-[2px] border-[var(--line)] pt-[var(--space-2)]">
           <span className="mono text-[14px] tracking-[0.06em] uppercase">
-            {formattedPrice}
+            {formatPKR(product.price)}
           </span>
           <span className={`mono text-[10px] tracking-[0.06em] uppercase border-[2px] border-[var(--line)] px-[var(--space-2)] py-[var(--space-1)] ${product.stock > 0 ? 'text-[var(--success)]' : 'text-[var(--error)]'}`}>
             {product.stock > 0 ? `[ ${product.stock} IN STOCK ]` : '[ OUT OF STOCK ]'}

@@ -42,7 +42,7 @@ export function CartDrawer() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 border-[2px] border-[var(--line)] bg-[var(--accent)] text-[var(--accent-ink)] p-[var(--space-4)] mono text-[12px] tracking-[0.06em] uppercase flex items-center gap-[var(--space-2)]"
+        className="fixed bottom-6 right-6 z-50 border-[2px] border-[var(--line)] bg-[var(--primary)] text-[var(--primary-ink)] p-[var(--space-4)] mono text-[12px] tracking-[0.06em] uppercase flex items-center gap-[var(--space-2)]"
         aria-label="Open cart"
       >
         <ShoppingBag className="w-5 h-5" />
@@ -78,6 +78,13 @@ export function CartDrawer() {
                         <button onClick={() => { cartStore.update(item.productId, item.quantity + 1); setItems(cartStore.get()); window.dispatchEvent(new Event("cart-updated")) }} className="border-[2px] border-[var(--line)] bg-[var(--bg-elevated)] px-[var(--space-3)] mono text-[12px] tracking-[0.06em] uppercase">+</button>
                       </div>
                     </div>
+                    <button
+                      aria-label="Remove item"
+                      onClick={() => { cartStore.remove(item.productId); setItems(cartStore.get()); window.dispatchEvent(new Event("cart-updated")) }}
+                      className="border-[2px] border-[var(--line)] bg-[var(--bg-elevated)] p-[var(--space-2)] self-start"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
                   </div>
                 )
               })}
@@ -89,7 +96,7 @@ export function CartDrawer() {
                 <div className="mono text-[10px] tracking-[0.06em] uppercase text-[var(--text-muted)]">Rs. {(500000 - subtotal)/100} away from free shipping</div>
               )}
               <div className="flex justify-between mono text-[14px] tracking-[0.06em] uppercase border-t-[2px] border-[var(--line)] pt-[var(--space-2)]"><span>Total</span><span>{formatPKR(total)}</span></div>
-              <Link href="/checkout" onClick={() => setOpen(false)} className="block text-center mt-[var(--space-2)] border-[2px] border-[var(--line)] bg-[var(--accent)] text-[var(--accent-ink)] py-[var(--space-4)] mono text-[12px] tracking-[0.06em] uppercase">Checkout</Link>
+              <Link href="/checkout" onClick={() => setOpen(false)} className="block text-center mt-[var(--space-2)] border-[2px] border-[var(--line)] bg-[var(--primary)] text-[var(--primary-ink)] py-[var(--space-4)] mono text-[12px] tracking-[0.06em] uppercase">Checkout</Link>
             </div>
           </div>
         </div>

@@ -69,7 +69,7 @@ export function Navbar() {
             </Link>
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="mt-[var(--space-4)] border-[2px] border-[var(--line)] bg-[var(--accent)] text-[var(--accent-ink)] px-[var(--space-4)] py-[var(--space-2)] mono text-[12px] tracking-[0.06em] uppercase self-start"
+              className="mt-[var(--space-4)] border-[2px] border-[var(--line)] bg-[var(--primary)] text-[var(--primary-ink)] px-[var(--space-4)] py-[var(--space-2)] mono text-[12px] tracking-[0.06em] uppercase self-start"
             >
               Close
             </button>

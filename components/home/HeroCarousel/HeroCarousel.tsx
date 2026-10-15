@@ -125,7 +125,7 @@ export function HeroCarousel() {
             ))}
           </motion.div>
         </div>
-        <div className="border-t-[2px] lg:border-t-0 lg:border-l-[2px] border-[var(--line)] bg-[var(--bg)] p-[var(--space-8)] flex flex-col justify-center">
+        <div className="border-t-[2px] lg:border-t-0 lg:border-l-[2px] border-[var(--line)] bg-[var(--bg)] p-[var(--space-8)] flex flex-col justify-center overflow-visible">
           <div className="mono text-[12px] tracking-[0.06em] uppercase border-[2px] border-[var(--line)] px-[var(--space-4)] py-[var(--space-2)] self-start mb-[var(--space-4)]">Carousel [ {activeIndex+1} / {slides.length} ]</div>
           <AnimatePresence mode="wait">
             <motion.div
@@ -135,7 +135,7 @@ export function HeroCarousel() {
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3 }}
             >
-              <h2 className="text-[clamp(3rem,8vw,12rem)] font-black leading-[0.85] tracking-[-0.04em] uppercase">
+              <h2 className="text-[clamp(2.5rem,7vw,10rem)] font-black leading-[0.85] tracking-[-0.04em] uppercase break-words">
                 {slides[activeIndex].title}
               </h2>
               <p className="mono text-[14px] tracking-[0.06em] mt-[var(--space-4)] max-w-[48ch] opacity-80">
@@ -144,7 +144,7 @@ export function HeroCarousel() {
               {slides[activeIndex].ctaText && (
                 <a
                   href={slides[activeIndex].ctaUrl}
-                  className="mt-[var(--space-8)] inline-flex items-center border-[2px] border-[var(--line)] bg-[var(--accent)] text-[var(--accent-ink)] px-[var(--space-6)] py-[var(--space-4)] mono text-[12px] tracking-[0.06em] uppercase"
+                  className="mt-[var(--space-8)] inline-flex items-center border-[2px] border-[var(--line)] bg-[var(--primary)] text-[var(--primary-ink)] px-[var(--space-6)] py-[var(--space-4)] mono text-[12px] tracking-[0.06em] uppercase"
                 >
                   {slides[activeIndex].ctaText}
                 </a>
@@ -175,7 +175,7 @@ export function HeroCarousel() {
             key={i}
             aria-label={`Go to slide ${i + 1}`}
             onClick={() => setActiveIndex(i)}
-            className={`border-[2px] border-[var(--line)] px-[var(--space-4)] py-[var(--space-2)] bg-[var(--bg)] ${i === activeIndex ? "bg-[var(--accent)] text-[var(--accent-ink)]" : ""}`}
+            className={`border-[2px] border-[var(--line)] px-[var(--space-4)] py-[var(--space-2)] bg-[var(--bg)] ${i === activeIndex ? "bg-[var(--primary)] text-[var(--primary-ink)]" : ""}`}
           >
             {String(i+1).padStart(2,'0')}
           </button>

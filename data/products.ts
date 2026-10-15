@@ -20,14 +20,14 @@ export const products: Product[] = [
   {
     id: "p1",
     name: "Pakistan Khaddar Suit - Luxe",
-    slug: "pakistan-khaddar-suite-luxe",
+    slug: "pakistan-khaddar-suit-luxe",
     category: "men's clothing",
     price: 249900,
     originalPrice: 329900,
     brand: "Xenia",
     stock: 42,
     images: [
-      "/products/khaddar-1.jpg",
+      "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=800&auto=format&fit=crop&q=60",
     ],
     colors: ["Black", "Navy", "Olive"],
     sizes: ["S", "M", "L", "XL", "XXL"],

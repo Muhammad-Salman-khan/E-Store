@@ -1,3 +1,15 @@
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: 'Order Confirmation',
+  description: 'Your order has been placed successfully. Thank you for shopping with E-Store.',
+  robots: { index: false, follow: false },
+  openGraph: {
+    title: 'Order Confirmation | E-Store',
+    description: 'Thank you for your order.',
+  },
+}
+
 export default function OrderConfirmationPage() {
   return (
     <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] flex items-center justify-center py-[var(--space-12)]">

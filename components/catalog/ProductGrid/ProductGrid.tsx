@@ -54,6 +54,42 @@ export function ProductGrid() {
           </div>
         </div>
 
+        <div className="mb-[var(--space-6)] flex flex-col gap-[var(--space-4)]">
+          <input
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="SEARCH PRODUCTS"
+            className="w-full border-[2px] border-[var(--line)] bg-[var(--bg-elevated)] px-[var(--space-4)] py-[var(--space-3)] mono text-[12px] tracking-[0.06em] uppercase placeholder-[var(--text-muted)]"
+          />
+          <div className="flex flex-wrap gap-[var(--space-2)]">
+            {["all","men's clothing","women's clothing","footwear","accessories"].map(cat => (
+              <button
+                key={cat}
+                onClick={() => setCategory(cat)}
+                className={`border-[2px] border-[var(--line)] px-[var(--space-4)] py-[var(--space-2)] mono text-[12px] tracking-[0.06em] uppercase ${category === cat ? "bg-[var(--primary)] text-[var(--primary-ink)]" : "bg-[var(--bg)]"}`}
+              >
+                {cat === "all" ? "All Categories" : cat.toUpperCase()}
+              </button>
+            ))}
+          </div>
+          <div className="flex gap-[var(--space-3)]">
+            <input
+              type="number"
+              value={minPrice}
+              onChange={e => setMinPrice(e.target.value)}
+              placeholder="MIN PRICE"
+              className="flex-1 border-[2px] border-[var(--line)] bg-[var(--bg-elevated)] px-[var(--space-4)] py-[var(--space-3)] mono text-[12px] tracking-[0.06em] uppercase placeholder-[var(--text-muted)]"
+            />
+            <input
+              type="number"
+              value={maxPrice}
+              onChange={e => setMaxPrice(e.target.value)}
+              placeholder="MAX PRICE"
+              className="flex-1 border-[2px] border-[var(--line)] bg-[var(--bg-elevated)] px-[var(--space-4)] py-[var(--space-3)] mono text-[12px] tracking-[0.06em] uppercase placeholder-[var(--text-muted)]"
+            />
+          </div>
+        </div>
+
         <div className="grid-determined grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filtered.map((product, i) => (
             <motion.div

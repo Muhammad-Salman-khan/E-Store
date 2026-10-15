@@ -1,4 +1,15 @@
+import type { Metadata } from "next"
 import { CheckoutSteps } from "@/components/checkout/CheckoutSteps/CheckoutSteps"
+
+export const metadata: Metadata = {
+  title: 'Checkout',
+  description: 'Complete your purchase. Secure guest checkout with shipping and demo payment.',
+  robots: { index: false, follow: false },
+  openGraph: {
+    title: 'Checkout | E-Store',
+    description: 'Secure guest checkout.',
+  },
+}
 
 export default function CheckoutPage() {
   return (

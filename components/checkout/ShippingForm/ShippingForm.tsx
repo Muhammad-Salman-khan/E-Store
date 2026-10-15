@@ -45,7 +45,7 @@ export function ShippingForm({ onComplete, onBack }: Props) {
       ))}
       <div className="flex gap-[var(--space-3)] pt-[var(--space-2)]">
         <button type="button" onClick={onBack} className="px-[var(--space-4)] py-[var(--space-3)] border-[2px] border-[var(--line)] mono text-[12px] tracking-[0.06em] uppercase bg-[var(--bg)]">Back</button>
-        <button className="px-[var(--space-4)] py-[var(--space-3)] border-[2px] border-[var(--line)] bg-[var(--accent)] text-[var(--accent-ink)] mono text-[12px] tracking-[0.06em] uppercase">Continue to Payment</button>
+        <button className="px-[var(--space-4)] py-[var(--space-3)] border-[2px] border-[var(--line)] bg-[var(--primary)] text-[var(--primary-ink)] mono text-[12px] tracking-[0.06em] uppercase">Continue to Payment</button>
       </div>
     </form>
   )
