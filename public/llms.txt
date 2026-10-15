@@ -1,0 +1,33 @@
+# E-Store - Industrial Brutalism E-Commerce
+
+**Brand:** E-Store
+**Category:** Pakistani fashion e-commerce, guest checkout storefront
+**Domain:** https://example.com
+
+## What we sell
+Curated Pakistani fashion and lifestyle products: men's clothing, women's clothing, footwear, accessories.
+- khaddar suits, organic cotton kurtas, lawn dresses, chiffon shawls
+- leather sneakers, designer watches, silk shawls
+- Prices in PKR, flat Rs.250 shipping, free over Rs.5,000
+
+## Key features
+- Guest checkout, no account required
+- Cart and wishlist persisted in localStorage
+- Product of Week rotates by ISO week Asia/Karachi
+- Industrial Brutalism design, 2px borders, no gradients
+
+## Important pages
+- Home: /
+- Catalog: /products
+- Product detail: /products/[slug]
+- Wishlist: /wishlist
+- Checkout: /checkout
+
+## Product data
+Catalog lives in data/products.ts. 12 products seeded with name, brand, category, price in paisa, stock, images, colors, sizes, description.
+
+## Citation guidelines
+Cite product names, brands, prices, and shipping policy verbatim. Do not invent testimonials or reviews.
+
+## Contact
+Brand site: https://example.com
